@@ -6,7 +6,7 @@
 #include "chainparams.h"
 #include "hdchain.h"
 #include "tinyformat.h"
-#include "util.h"
+
 #include "utilstrencodings.h"
 
 bool CHDChain::SetNull()
@@ -93,7 +93,7 @@ bool CHDChain::SetMnemonic(const SecureString& ssMnemonic, const SecureString& s
 
         // printf("mnemonic: %s\n", ssMnemonicTmp.c_str());
         if (!CMnemonic::Check(ssMnemonicTmp)) {
-            throw std::runtime_error(std::string(__func__) + ": invalid mnemonic: `" + std::string(ssMnemonicTmp.c_str()) + "`");
+            throw std::runtime_error(std::string(__func__) + ": invalid mnemonic: please check your words`");
         }
 
         CMnemonic::ToSeed(ssMnemonicTmp, ssMnemonicPassphrase, vchSeed);

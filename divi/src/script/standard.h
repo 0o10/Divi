@@ -6,7 +6,9 @@
 #ifndef BITCOIN_SCRIPT_STANDARD_H
 #define BITCOIN_SCRIPT_STANDARD_H
 
+#include "pubkey.h"
 #include "script/interpreter.h"
+#include "script/scriptandsigflags.h"
 #include "uint256.h"
 
 #include <boost/variant.hpp>
@@ -63,7 +65,6 @@ enum txnouttype
     TX_SCRIPTHASH,
     TX_MULTISIG,
     TX_NULL_DATA,
-    TX_ZEROCOINMINT,
 };
 
 class CNoDestination {

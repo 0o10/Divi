@@ -90,12 +90,6 @@ Object blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDe
 
     result.push_back(Pair("moneysupply",ValueFromAmount(blockindex->nMoneySupply)));
 
-    Object zdivObj;
-    for (auto denom : libzerocoin::zerocoinDenomList) {
-        zdivObj.push_back(Pair(to_string(denom), ValueFromAmount(blockindex->mapZerocoinSupply.at(denom) * (denom*COIN))));
-    }
-    zdivObj.emplace_back(Pair("total", ValueFromAmount(blockindex->GetZerocoinSupply())));
-
     return result;
 }
 
@@ -409,7 +403,7 @@ Value gettxout(const Array& params, bool fHelp)
             "{\n"
             "  \"bestblock\" : \"hash\",    (string) the block hash\n"
             "  \"confirmations\" : n,       (numeric) The number of confirmations\n"
-            "  \"value\" : x.xxx,           (numeric) The transaction value in btc\n"
+            "  \"value\" : x.xxx,           (numeric) The transaction value in DIVI\n"
             "  \"scriptPubKey\" : {         (json object)\n"
             "     \"asm\" : \"code\",       (string) \n"
             "     \"hex\" : \"hex\",        (string) \n"
@@ -807,9 +801,7 @@ Value getinvalid (const Array& params, bool fHelp)
             objTx.emplace_back(Pair("mixed_with_valid", objMixedValid));
 
         CScript scriptPubKey = tx.vout[out.n].scriptPubKey;
-        if (scriptPubKey.IsZerocoinMint()) {
-            nMint += nValue;
-        } else if (!fSpent) {
+        if (!fSpent) {
             CTxDestination dest;
             if (!ExtractDestination(scriptPubKey, dest)) {
                 continue;

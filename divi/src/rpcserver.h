@@ -220,19 +220,6 @@ extern json_spirit::Value setstakesplitthreshold(const json_spirit::Array& param
 extern json_spirit::Value getstakesplitthreshold(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value multisend(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value autocombinerewards(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value getzerocoinbalance(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value listmintedzerocoins(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value listspentzerocoins(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value listzerocoinamounts(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value mintzerocoin(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value spendzerocoin(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value resetmintzerocoin(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value resetspentzerocoin(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value getarchivedzerocoin(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value importzerocoins(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value exportzerocoins(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value reconsiderzerocoins(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value getspentzerocoinamount(const json_spirit::Array& params, bool fHelp);
 
 extern json_spirit::Value getrawtransaction(const json_spirit::Array& params, bool fHelp); // in rcprawtransaction.cpp
 extern json_spirit::Value listunspent(const json_spirit::Array& params, bool fHelp);
@@ -272,6 +259,9 @@ extern json_spirit::Value getmasternodecount(const json_spirit::Array& params, b
 extern json_spirit::Value masternodeconnect(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value masternodecurrent(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value masternodedebug(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value setupmasternode(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value verifymasternodesetup(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value broadcaststartmasternode(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value startmasternode(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value createmasternodekey(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value getmasternodeoutputs(const json_spirit::Array& params, bool fHelp);
