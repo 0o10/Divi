@@ -10,6 +10,7 @@
 #include "masternodeman.h"
 #include "protocol.h"
 #include "spork.h"
+#include <cstring>
 
 CActiveMasternode activeMasternode;
 
@@ -380,8 +381,33 @@ vector<COutput> CActiveMasternode::SelectCoinsMasternode()
 // when starting a Masternode, this can enable to run as a hot wallet with no funds
 bool CActiveMasternode::EnableHotColdMasterNode(CTxIn& newVin, CService& newService)
 {
-    if (!fMasterNode)
+    if (!fMasterNode) 
+    {
         return false;
+    }
+
+    bool transactionBelongsToMasternode = false;
+    BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
+        if(
+            std::strcmp(newVin.prevout.hash.ToString().c_str(), mne.getTxHash().c_str()) == 0 &&
+            std::strcmp(std::to_string(newVin.prevout.n).c_str(), mne.getOutputIndex().c_str()) == 0
+        )
+        {
+            transactionBelongsToMasternode = true;
+            break;
+        }
+    }
+
+    if(!transactionBelongsToMasternode)
+    {
+        return false;
+    }
+    
+    if(status == ACTIVE_MASTERNODE_STARTED)
+    {
+        LogPrintf("CActiveMasternode::EnableHotColdMasterNode() - Cannot modify masternode that is already started.\n");
+        return false;
+    }
 
     status = ACTIVE_MASTERNODE_STARTED;
 
